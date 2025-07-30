@@ -79,6 +79,7 @@
         break;
         case 'user_list':
         include 'user.php';
+        break;  
         case 'add_user':
         include 'add_user.php';
         break;
