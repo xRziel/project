@@ -151,7 +151,7 @@ if (empty($_SESSION['username'])) {
       <!--begin::User Menu Dropdown-->
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-          <img src="./assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow" alt="User Image" />
+          <img src="./assets/img/profile.gif" class="user-image rounded-circle shadow" alt="User Image" />
           <span class="d-none d-md-inline">
             <?php echo $_SESSION['fullname']; ?>
           </span>
@@ -159,9 +159,11 @@ if (empty($_SESSION['username'])) {
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
           <!--begin::User Image-->
           <li class="user-header text-bg-primary">
-            <img src="./assets/img/user2-160x160.jpg" class="rounded-circle shadow" alt="User Image" />
+            <img src="./assets/img/profile.gif" class="rounded-circle shadow" alt="User Image" />
             <p>
-              Alexander Pierce - Web Developer
+              <?php echo $_SESSION['fullname']; ?>
+          </span>
+        </a>
               <small>Member since Nov. 2023</small>
             </p>
           </li>

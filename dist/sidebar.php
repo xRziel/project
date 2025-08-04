@@ -31,6 +31,12 @@
             <p>User</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="../logout.php" class="nav-link">
+            <i class="bi bi-box-arrow-left"></i>
+            <p>Log Out</p>
+          </a>
+        </li>
       </ul>
       <!--end::Sidebar Menu-->
     </nav>
