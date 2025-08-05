@@ -1,9 +1,9 @@
     <?php
-        $username = $_GET['username']; // Get username from URL
-        require '../connect.php'; // Include database connection
-        $sql = "SELECT * FROM narak WHERE username = '$username'"; // SQL query to fetch user data
+        $username = $_GET['username']; 
+        require '../connect.php'; 
+        $sql = "SELECT * FROM narak WHERE username = '$username'"; 
         $result = $con->query(($sql));
-        $row = mysqli_fetch_array($result); // Fetch user data
+        $row = mysqli_fetch_array($result);
         if (isset($_POST['submit'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -62,7 +62,7 @@
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
                     <input type="text" class="form-control" name="username" id="exampleInputEmail1" 
-                    aria-describedby="emailHelp" value="<?php echo $row['username'] ?>" disabled />
+                    aria-describedby="emailHelp" value="<?php echo $row['username'] ?>" readonly />
                     
                 </div>
                 <div class="mb-3">
