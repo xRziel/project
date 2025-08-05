@@ -52,17 +52,16 @@
         }
 
         .login-image {
-            padding: 5%;
-            display: flex;
+            padding: 25%;
             align-items: center;
             justify-content: center;
             flex: 1 1 50%;
-            min-height: 400px;
+            min-height: 200px;
             border-radius: 50%;
             overflow: hidden;
             background: url('https://64.media.tumblr.com/96ec6b2c635d1ac0ef03e7c589779855/bcb26f1fed013fd5-84/s540x810/47ef2532d3568cae892397df1cbb772f5f66ce85.gif') no-repeat center center;
             background-size: cover;
-            margin: 20px auto;
+            margin: 50px auto;
         }
 
 
@@ -80,7 +79,7 @@
 
         .login-form {
             flex: 1 1 50%;
-            padding: 80px 80px;
+            padding: 80px 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
