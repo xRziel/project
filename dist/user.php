@@ -66,7 +66,7 @@ $result = $con->query($sql);
                                 <td>
                                   <a href="index.php?page=edit_user&username=<?php echo $row['username']?>" class="btn btn-warning">
                                     <i class="bi bi-pencil-square"></i></a>
-                                  <a href="index.php?page=del_user&username=<?php echo $row['username']?>" class="btn btn-danger" onclick="return confirm('⁕ Confirm on Deleted (っ °Д °;)っ')">
+                                  <a href="index.php?page=del_user&username=<?php echo $row['username']?>" class="btn btn-danger" onclick="return confirm('⁕ Confirm on Delete User?')">
                                     <i class="bi bi-x-circle"></i></a>
                                 </td>
                             </tr>

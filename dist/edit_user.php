@@ -62,7 +62,7 @@
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
                     <input type="text" class="form-control" name="username" id="exampleInputEmail1" 
-                    aria-describedby="emailHelp" value="<?php echo $row['username'] ?>" disable />
+                    aria-describedby="emailHelp" value="<?php echo $row['username'] ?>" disabled />
                     
                 </div>
                 <div class="mb-3">
