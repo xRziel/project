@@ -73,24 +73,36 @@
     <main class="app-main">
       <?php
       $page = isset($_GET['page']) ? $_GET['page'] : '';
-    switch($page){
-      case 'dashboard':
-        include 'dashboard.php';
-        break;
+      switch ($page) {
+        case 'dashboard':
+          include 'dashboard.php';
+          break;
         case 'user_list':
-        include 'user.php';
-        break;  
+          include 'user.php';
+          break;
         case 'add_user':
-        include 'add_user.php';
-        break;
-          case 'edit_user':
+          include 'add_user.php';
+          break;
+        case 'edit_user':
           include 'edit_user.php';
+          break;
+        case 'product':
+          include 'products.php';
           break;
         case 'del_user':
           include 'del_user.php';
           break;
+        case 'add_product':
+          include 'add_products.php';
+          break;
+        case 'edit_product':
+          include 'edit_products.php';
+          break;
+        case 'del_product':
+          include 'del_products.php';
+          break;
         default:
-    }
+      }
       ?>
     </main>
     <!--end::App Main-->
