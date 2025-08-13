@@ -10,11 +10,14 @@
             $fullname = $_POST['fullname'];
             $phone = $_POST['phone'];
             $email = $_POST['email'];
-            $sql2 = "UPDATE narak SET password='$password', fullname='$fullname', phone='$phone', email='$email' WHERE username = '$username'";
+            $filename = $_FILES['image']['name'];
+            move_uploaded_file($_FILES['image']['tmp_name'], 'assets/user_img/' . $filename);
+            $sql2 = "UPDATE narak SET password='$password', fullname='$fullname', phone='$phone', email='$email', image='$filename' WHERE username = '$username'";
             $result2 = $con->query($sql2);
             if(!$result2) {
                 echo "<script>alert('ไม่สามารถบันทึกข้อมูลได้');history.back();</script>";
             }else{
+
                 echo "<script>window.location.href='index.php?page=user_list';</script>";
             }
         }
@@ -56,7 +59,7 @@
             </div>
             <!--end::Header-->
             <!--begin::Form-->
-            <form action = "<?php $_SERVER['PHP_SELF'] ?>" method = "POST">
+            <form action = "<?php $_SERVER['PHP_SELF'] ?>" method = "POST" enctype="multipart/form-data">
                 <!--begin::Body-->
                 <div class="card-body">
                 <div class="mb-3">
@@ -85,6 +88,10 @@
                     <input type="email" name="email" class="form-control" id="exampleInputPassword1"
                     value="<?php echo $row['email'] ?>" />
                 </div>
+                 <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Image</label>
+                <input type="file" name="image" class="form-control" id="exampleInputPassword1" />
+              </div>
                 </div>
                 <!--end::Body-->
                 <!--begin::Footer-->

@@ -49,6 +49,8 @@ $result = $con->query($sql);
                           <th>pro_price</th>
                           <th>pro_amount</th>
                           <th>Pro_status</th>
+                          <th>Image</th>
+                          <th>Manage</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -63,6 +65,9 @@ $result = $con->query($sql);
                                 <td><?php echo $row ['pro_price'] ?></td>
                                 <td><?php echo $row ['pro_amount'] ?></td>
                                 <td><?php echo $row ['pro_status'] ?></td>
+                                <td>
+                                  <img src="assets/user_img/<?php echo $row['image'] ?>" alt="" width="50px" height="50px">
+                                </td>
                                 <td>
                                   <a href="index.php?page=edit_product&pro_id=<?php echo $row['pro_id']?>" class="btn btn-warning">
                                     <i class="bi bi-pencil-square"></i></a>

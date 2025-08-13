@@ -6,6 +6,7 @@
         $fullname = $_POST['fullname'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
+        $filename = $_FILES['image']['name'];
         if (empty($username) || empty($password) || empty($fullname) || empty($phone) || empty($email)) {
     echo  "<script>alert('กรุณากรอกข้อมูลให้ครบทุกช่อง');history.back()</script>";
   } else {
@@ -14,7 +15,8 @@
     if ($old_num == 1) {
       echo  "<script>alert('username นี้มีคนใช้แล้ว');history.back()</script>";
     } else {
-      $sql = "INSERT INTO narak VALUES('$username','$password','$fullname','$phone','$email')";
+      move_uploaded_file($_FILES['image']['tmp_name'], 'assets/user_img/' . $filename);
+      $sql = "INSERT INTO narak VALUES('$username','$password','$fullname','$phone','$email', '$filename')";
       $result = $con->query($sql);
       if (!$result) {
         echo "<script>alert('บันทึกข้อมูลผิดพลาด');history.back()</script>";
@@ -62,7 +64,7 @@
           </div>
           <!--end::Header-->
           <!--begin::Form-->
-          <form action = "<?php $_SERVER['PHP_SELF'] ?>" method = "POST">
+          <form action = "<?php $_SERVER['PHP_SELF'] ?>" method = "POST" enctype="multipart/form-data">
             <!--begin::Body-->
             <div class="card-body">
               <div class="mb-3">
@@ -85,6 +87,10 @@
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" id="exampleInputPassword1" />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Image</label>
+                <input type="file" name="image" class="form-control" id="exampleInputPassword1" />
               </div>
             </div>
             <!--end::Body-->
