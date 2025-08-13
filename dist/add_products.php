@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     if ($exist_pro_id) {
       echo "<script>alert('รหัสสินค้าซ้ำ กรุณาเปลี่ยนรหัสสินค้า');history.back();</script>";
     } else {
-      move_uploaded_file($_FILES['image']['tmp_name'], 'assets/user_img/' . $filename);
+      move_uploaded_file($_FILES['image']['tmp_name'], 'assets/product_img/' . $filename);
       $sql = "INSERT INTO products (pro_id, pro_name, pro_price, pro_amount, pro_status, image)
         VALUES ('$pro_id', '$pro_name', '$pro_price', '$pro_amount', '$pro_status', '$filename')";
 
