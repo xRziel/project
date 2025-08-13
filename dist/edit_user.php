@@ -11,13 +11,15 @@
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $filename = $_FILES['image']['name'];
-        if (isset($filename)) {
+        if ($filename != "") {
             unlink('assets/user_img/' . $row['image']);
             move_uploaded_file($_FILES['image']['tmp_name'], 'assets/user_img/' . $filename);
             $sql2 = "UPDATE narak SET password='$password', fullname='$fullname', phone='$phone', email='$email', image='$filename' WHERE username = '$username'";
         } else {
-            $sql2 = "UPDATE narak SET password='$password', fullname='$fullname', phone='$phone', email='$email', WHERE username = '$username'";
+            // ลบ comma ตัวสุดท้ายออก
+            $sql2 = "UPDATE narak SET password='$password', fullname='$fullname', phone='$phone', email='$email' WHERE username = '$username'";
         }
+
 
         $result2 = $con->query($sql2);
         if (!$result2) {

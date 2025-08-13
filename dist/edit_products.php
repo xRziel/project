@@ -4,46 +4,65 @@ require '../connect.php';
 // ใช้ GET ก่อน ถ้าไม่มีใช้ POST แทน
 $pro_id = $_GET['pro_id'] ?? $_POST['pro_id'] ?? '';
 
-// ถ้ามี pro_id → ดึงข้อมูลจาก DB
 if (!empty($pro_id)) {
-  $sql = "SELECT * FROM products WHERE pro_id = '$pro_id'";
-  $result = $con->query($sql);
-  $row = mysqli_fetch_array($result);
+    $sql = "SELECT * FROM products WHERE pro_id = '$pro_id'";
+    $result = $con->query($sql);
+    $row = mysqli_fetch_array($result);
 }
 
-// เมื่อมีการ submit form
+// เช็คว่ามีการ submit form หรือยัง
 if (isset($_POST['submit'])) {
-  $pro_id     = $_POST['pro_id'];
-  $pro_name   = $_POST['pro_name'];
-  $pro_price  = $_POST['pro_price'];
-  $pro_amount = $_POST['pro_amount'];
-  $pro_status = $_POST['pro_status'];
-  $filename = $_FILES['image']['name'];
-  if (isset($filename)) {
-    unlink('assets/product_img/' . $row['image']);
-    move_uploaded_file($_FILES['image']['tmp_name'], 'assets/product_img/' . $filename);
-  }
+    $pro_id     = $_POST['pro_id'];
+    $pro_name   = $_POST['pro_name'];
+    $pro_price  = $_POST['pro_price'];
+    $pro_amount = $_POST['pro_amount'];
+    $pro_status = $_POST['pro_status'];
+    
+    $filename = $_FILES['image']['name'];
+    $tmp_name = $_FILES['image']['tmp_name'];
+    $upload_dir = 'assets/product_img/';
 
-  if (empty($pro_id) || empty($pro_name) || empty($pro_price) || empty($pro_amount) || empty($pro_status)) {
-    echo "<script>alert('กรุณากรอกข้อมูลให้ครบถ้วน'); history.back();</script>";
-  } else {
-    move_uploaded_file($_FILES['image']['tmp_name'], 'assets/product_img/' . $filename);
-    $sql = "UPDATE products
-            SET pro_name='$pro_name',
+    // ตรวจสอบข้อมูลครบถ้วน
+    if (empty($pro_id) || empty($pro_name) || empty($pro_price) || empty($pro_amount) || empty($pro_status)) {
+        echo "<script>alert('กรุณากรอกข้อมูลให้ครบถ้วน'); history.back();</script>";
+        exit;
+    }
+
+    // ถ้ามีไฟล์รูปใหม่ถูกอัพโหลด
+    if (!empty($filename) && $_FILES['image']['error'] == 0) {
+        // ลบไฟล์รูปเก่า ถ้ามี
+        if (!empty($row['image']) && file_exists($upload_dir . $row['image'])) {
+            unlink($upload_dir . $row['image']);
+        }
+        // ย้ายไฟล์รูปใหม่
+        move_uploaded_file($tmp_name, $upload_dir . $filename);
+
+        // อัพเดตข้อมูลรวมรูปภาพ
+        $sql = "UPDATE products SET 
+                pro_name='$pro_name',
+                pro_price='$pro_price',
+                pro_amount='$pro_amount',
+                pro_status='$pro_status',
+                image='$filename'
+                WHERE pro_id='$pro_id'";
+    } else {
+        // อัพเดตข้อมูลไม่เปลี่ยนรูปภาพ
+        $sql = "UPDATE products SET 
+                pro_name='$pro_name',
                 pro_price='$pro_price',
                 pro_amount='$pro_amount',
                 pro_status='$pro_status'
-                , image='$filename'
-            WHERE pro_id='$pro_id'";
+                WHERE pro_id='$pro_id'";
+    }
 
     if ($con->query($sql)) {
-      echo "<script>alert('อัปเดตข้อมูลสินค้าสำเร็จ ✅'); window.location.href='index.php?page=product';</script>";
+        echo "<script>alert('อัปเดตข้อมูลสินค้าสำเร็จ ✅'); window.location.href='index.php?page=product';</script>";
     } else {
-      echo "<script>alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล ❌'); history.back();</script>";
+        echo "<script>alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล ❌'); history.back();</script>";
     }
-  }
 }
 ?>
+
 
 <!--begin::App Content Header--><!--begin::App Content Header-->
 <div class="app-content-header">
