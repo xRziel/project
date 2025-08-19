@@ -4,7 +4,7 @@ $sql = "SELECT * FROM products";
 $result = $con->query($sql);
 ?>
 
-        <!--begin::App Content Header-->
+      <!--begin::App Content Header-->
         <div class="app-content-header">
           <!--begin::Container-->
           <div class="container-fluid">
@@ -38,9 +38,27 @@ $result = $con->query($sql);
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <a href="index.php?page=add_product" class="btn btn-success mb-4">
-                  <i class="bi bi-people-add"></i> add product
-                </a>
+                    <div class="row">
+
+              <div class="col-md-10">
+                <form action="add_product_csv.php" method="POST" enctype="multipart/form-data">
+                  <div class="row mb-3">
+                    <label for="csvFile" class="col-sm-2 col-form-label">add product csv </label>
+                    <div class="col-sm-8">
+                      <input type="file" class="form-control" name="csv_file" id="csvFile" accept=".csv,.xlsx,.xls">
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="submit" class="btn btn-success w-100" value="อัปโหลด" name="upload">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="col-md-2">
+                <a href="index.php?page=add_product" class="btn btn-success mb-4">
+                  <i class="bi bi-person-add">add product
+                </a></i>
+              </div>
                     <table class="table table-bordered">
                       <thead>
                         <tr>
