@@ -101,6 +101,12 @@
         case 'del_product':
           include 'del_products.php';
           break;
+        case 'search_user':
+          include 'search_user.php';
+          break;
+        case 'search_product':
+          include 'search_product.php';
+          break;
         default:
       }
       ?>

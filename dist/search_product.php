@@ -1,10 +1,15 @@
-<?php
+<?php 
 require '../connect.php';
-$sql = "SELECT * FROM products";
+
+$keywords = $_POST['keywords'] ?? ''; 
+
+$keywords = $con->real_escape_string($keywords);
+
+$sql = "SELECT * FROM products WHERE pro_id LIKE '%$keywords%' OR pro_name LIKE '%$keywords%'";
 $result = $con->query($sql);
 ?>
 
-      <!--begin::App Content Header-->
+
 <div class="app-content-header">
   <!--begin::Container-->
   <div class="container-fluid">

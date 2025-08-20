@@ -1,7 +1,13 @@
-<?php
+<?php 
 require '../connect.php';
-$sql = "SELECT * FROM narak";
+$keyword = $_POST['keyword'];
+
+$keyword = $con->real_escape_string($keyword);
+
+$sql = "SELECT * FROM narak WHERE username LIKE '%$keyword%' OR fullname LIKE '%$keyword%' OR email LIKE '%$keyword%'";
 $result = $con->query($sql);
+
+
 ?>
 
 <!--begin::App Content Header-->
@@ -48,21 +54,6 @@ $result = $con->query($sql);
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <div class="row">
-
-              <div class="col-md-10">
-                <form action="add_user_csv.php" method="POST" enctype="multipart/form-data">
-                  <div class="row mb-3">
-                    <label for="csvFile" class="col-sm-2 col-form-label">add user csv</label>
-                    <div class="col-sm-8">
-                      <input type="file" class="form-control" name="csv_file" id="csvFile" accept=".csv,.xlsx,.xls">
-                    </div>
-                    <div class="col-sm-2">
-                      <input type="submit" class="btn btn-success w-100" value="อัปโหลด" name="upload">
-                    </div>
-                  </div>
-                </form>
-              </div>
 
               <div class="col-md-2">
                 <a href="index.php?page=add_user" class="btn btn-success mb-4">
